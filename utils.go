@@ -58,6 +58,12 @@ func (u *Utils) SqlBuild(d *DB) error {
 			d.QuerySql += " limit " + strconv.Itoa(d.QueryLimit[0]) + "," + strconv.Itoa(d.QueryLimit[1])
 		}
 		break
+	case "count":
+		d.QuerySql = "select count(*) from `" + d.Table + "`"
+		if d.QueryWhere != "" {
+			d.QuerySql += " where " + d.QueryWhere
+		}
+		break
 	case "insert":
 		var qt []string
 		for i := 0; i < len(d.Fields); i++ {

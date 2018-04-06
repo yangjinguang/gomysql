@@ -158,3 +158,15 @@ func (d *DB) Delete() error {
 	_, err = d.DB.Exec(d.QuerySql)
 	return err
 }
+
+func (d *DB) Count() (int, error) {
+	d.QueryMethod = "count"
+	count := 0
+	err := utils.SqlBuild(d)
+	if err != nil {
+		return count, err
+	}
+	row := d.DB.QueryRow(d.QuerySql)
+	err = row.Scan(&count)
+	return count, err
+}

@@ -21,7 +21,7 @@ func init() {
 		"root",
 		"",
 		"127.0.0.1",
-		"3306",
+		3306,
 		"test_db",
 	))
 	db = d
@@ -78,4 +78,13 @@ func TestDB_Delete(t *testing.T) {
 	if err != nil {
 		t.Fail()
 	}
+}
+
+func TestDB_Count(t *testing.T) {
+	count,err := db.T("users").Count()
+	if err != nil {
+		fmt.Print(err.Error())
+		t.Fail()
+	}
+	fmt.Println(count)
 }
